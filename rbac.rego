@@ -6,10 +6,9 @@ allow {
 	some i
 	role = input.roles[i]
 
-    	entity := data.roles[role][input.entity]
+    	action := data.roles[role][input.entity]
 
-    	some action
-	entity[action] == input.action
+	action == input.action
 }
 
 user_is_admin {
