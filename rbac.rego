@@ -3,11 +3,12 @@ package app.rbac
 default allow = false
 
 allow {
-	some role
-	input.roles[role]
+	some i
+	role = input.roles[i]
 
-	entity := data.roles[role].entities[input.entity]
-	some action
+    	entity := data.roles[role].entities[input.entity]
+
+    	some action
 	entity[action] == input.action
 }
 
