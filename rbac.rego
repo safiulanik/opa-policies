@@ -6,7 +6,7 @@ allow {
 	some i
 	role = input.roles[i]
 
-    	entity := data.roles[role].entities[input.entity]
+    	entity := data.roles[role][input.entity]
 
     	some action
 	entity[action] == input.action
