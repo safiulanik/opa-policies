@@ -1,18 +1,22 @@
 package app.rbac
 
-default allow = false
+import future.keywords.in
+import future.keywords.if
 
-allow {
-	some i
-	role = input.roles[i]
+default allow := false
 
-    action := data.roles[role][input.entity][input.action]
-    
-    action == true
+allowed if is_superadmin
+allowed if allow_role_user
+
+is_superadmin {
+    some i
+    role := data.roles[i]
+    role["metadata"]["name"] == "superadmin"
+    i in input.roles
 }
 
-user_is_admin {
+allow_role_user {
 	some i
-
-	input.roles[i] == "admin"
+	role := input.roles[i]
+    input.action == data.roles[role]["access"][input.namespace]["root"][_]
 }
